@@ -25,7 +25,7 @@ export const PAIN_POINTS: PainPoint[] = [
   {
     id: "pain-1",
     number: "01",
-    title: "A Couraça da Força",
+    title: "Estar Sempre Forte",
     description: "Você se obrigou a ser forte demais para aguentar a burocracia, o frio e a distância. Agora, seu pescoço, costas e estômago estão pagando o preço em forma de dores crônicas."
   },
   {

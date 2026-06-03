@@ -5,6 +5,7 @@ import {
   MapPin, 
   UserCheck, 
   CheckCircle2, 
+  ChevronLeft,
   ChevronRight, 
   ShieldAlert, 
   Lock, 
@@ -18,14 +19,16 @@ import {
   X,
   Compass,
   ArrowDownCircle,
-  HelpCircle
+  HelpCircle,
+  MessageCircle
 } from "lucide-react";
 import { PAIN_POINTS, FOR_WHOM_ITEMS } from "./data";
 import FAQ from "./components/FAQ";
 
-const WHATSAPP_NUMBER = "351910238128";
+const WHATSAPP_NUMBER = "553388613561";
 
-const getWhatsAppUrl = (text: string) => {
+const getWhatsAppUrl = (originalText?: string) => {
+  const text = "Olá, vim do site e gostaria de mais informções";
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 };
 
@@ -55,6 +58,8 @@ export default function App() {
   const [currentLeadToast, setCurrentLeadToast] = useState<ActiveLeadNotice | null>(null);
   const [toastIndex, setToastIndex] = useState(0);
   const [userLeadInfo, setUserLeadInfo] = useState<{ name: string; country: string; symptom: string } | null>(null);
+  const [activePainSlide, setActivePainSlide] = useState(0);
+  const [activeCheckSlide, setActiveCheckSlide] = useState(0);
 
   // Rotate a high-conversion social proof "Live Lead Toast" every 12 seconds
   useEffect(() => {
@@ -110,16 +115,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen text-slate-800 font-sans selection:bg-gold-200 selection:text-gold-900 bg-petrol-50/50">
+    <div className="min-h-screen text-slate-800 font-sans selection:bg-gold-200 selection:text-gold-900 bg-petrol-50/50 overflow-x-hidden">
       
-      {/* Clinically Designed Announcement Header Banner to filter and capture traffic immediately */}
-      <div className="w-full bg-slate-950 text-white/90 text-xs text-center py-3.5 px-4 font-mono font-medium tracking-wide flex items-center justify-center gap-3 border-b border-petrol-800/40">
-        <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-        <span className="uppercase text-[10px] md:text-xs">
-          Atendimento On-line Personalizado para Brasileiros na Europa e Reino Unido (Fuso Horário Adaptado)
-        </span>
-      </div>
-
       {/* Modern, Clean Minimal Header - NO NAVIGATION to distract the user from CTA */}
       <header className="py-6 px-6 max-w-7xl mx-auto flex justify-between items-center bg-transparent relative z-20">
         <div className="flex items-center gap-4">
@@ -136,20 +133,13 @@ export default function App() {
             </div>
           </div>
           <div className="flex flex-col">
-            <span className="font-serif text-lg md:text-2xl font-semibold tracking-tight text-slate-900 leading-tight">
+            <span className="font-display text-lg md:text-2xl font-semibold tracking-tight text-slate-900 leading-tight">
               Gilsane Cordeiro
             </span>
             <span className="text-[9px] md:text-[10px] font-mono tracking-widest text-gold-600 uppercase font-bold">
               Análise Corporal & Clinica Psicanalítica
             </span>
           </div>
-        </div>
-        
-        {/* Safe Clinique Badge */}
-        <div className="flex items-center gap-2 text-xs text-petrol-700 bg-white shadow-sm border border-petrol-100/60 rounded-full py-1.5 px-4 font-light">
-          <Video className="w-3.5 h-3.5 text-gold-500" />
-          <span className="hidden sm:inline">Sessão de Diagnóstico Online</span>
-          <span className="sm:hidden">Sessão Online</span>
         </div>
       </header>
 
@@ -164,16 +154,33 @@ export default function App() {
           {/* Left Text Box */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             
-            {/* Super Head */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-slate-900 border border-slate-800 rounded-full text-slate-200 text-xs font-mono font-medium uppercase tracking-wider mb-6">
-              <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-pulse" />
-              Para quem está sustentando tudo sozinho no exterior
-            </div>
-
             {/* Headline H1 */}
-            <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl text-slate-950 font-normal leading-[1.12] mb-6 tracking-tight">
-              Até quando você vai fingir que está aguentando o <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">peso de viver aí fora?</span>
+            <h1 className="font-display text-3xl md:text-5xl lg:text-6xl text-slate-950 font-medium leading-[1.15] mb-6 tracking-tight">
+              Até quando você vai fingir que está aguentando o <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5 animate-pulse">peso de viver aí fora?</span>
             </h1>
+
+            {/* CTA action buttons */}
+            <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 w-full mb-8 relative z-10 text-center">
+              <a
+                href={getWhatsAppUrl("Olá Gilsane! Cheguei ao meu limite morando no exterior e preciso de ajuda. Gostaria de agendar meu diagnóstico corporal.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-auto max-w-[280px] sm:max-w-none py-3 px-6 sm:py-4 sm:px-8 rounded-xl bg-slate-900 hover:bg-slate-950 text-white font-semibold tracking-wide transition-all shadow-xl hover:shadow-slate-900/10 hover:scale-[1.01] text-xs sm:text-sm text-center flex items-center justify-center gap-2.5 cursor-pointer group uppercase animate-cta-pulse self-center"
+              >
+                <span>Cheguei ao meu limite, preciso de ajuda</span>
+                <ChevronRight className="w-4 h-4 text-gold-400" />
+              </a>
+
+              <div className="flex flex-col justify-center items-center sm:items-start text-center sm:text-left gap-1 px-2.5">
+                <div className="flex items-center gap-1">
+                  {[1, 2, 3, 4, 5].map((s) => (
+                    <Star key={s} className="w-3.5 h-3.5 text-gold-500 fill-gold-500" />
+                  ))}
+                  <span className="text-xs font-semibold text-slate-900 ml-1.5">+500 brasileiros</span>
+                </div>
+                <span className="text-[11px] text-slate-500 font-light">atendidos em Portugal, Irlanda e Reino Unido</span>
+              </div>
+            </div>
 
             {/* Mobile Portrait view - shown only on mobile/tablet, hidden on desktop */}
             <div className="block lg:hidden w-full my-6 flex justify-center">
@@ -202,29 +209,6 @@ export default function App() {
               através de uma <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">metodologia profunda</span> e focada, a Gilsane analisa de forma cirúrgica o formato do seu corpo e os traços da fisionomia para entregar um <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">diagnóstico exato</span> — <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">e aparentemente inexplicável</span> — das dores que você tenta esconder do mundo. 
               É o <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">alívio imediato</span> que você precisa, sem enrolação.
             </p>
-
-            {/* CTA action buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full">
-              <a
-                href={getWhatsAppUrl("Olá Gilsane! Cheguei ao meu limite morando no exterior e preciso de ajuda. Gostaria de agendar meu diagnóstico corporal.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="py-4 px-8 rounded-xl bg-slate-900 hover:bg-slate-950 text-white font-bold tracking-wide transition-all shadow-xl hover:shadow-slate-900/10 hover:scale-[1.01] text-sm text-center flex items-center justify-center gap-3 cursor-pointer group uppercase animate-cta-pulse"
-              >
-                <span>Cheguei ao meu limite, preciso de ajuda</span>
-                <ChevronRight className="w-4 h-4 text-gold-400" />
-              </a>
-
-              <div className="flex flex-col justify-center items-center sm:items-start text-center sm:text-left gap-1 px-2.5">
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <Star key={s} className="w-3.5 h-3.5 text-gold-500 fill-gold-500" />
-                  ))}
-                  <span className="text-xs font-semibold text-slate-900 ml-1.5">+500 brasileiros</span>
-                </div>
-                <span className="text-[11px] text-slate-500 font-light">atendidos em Portugal, Irlanda e Reino Unido</span>
-              </div>
-            </div>
 
             {/* Micro Benefits list under the main CTA */}
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-xs text-slate-500 border-t border-slate-200/60 pt-5 w-full">
@@ -273,21 +257,21 @@ export default function App() {
       </section>
 
       {/* SEÇÃO 2: A Validação da Dor */}
-      <section className="py-20 bg-slate-950 text-white relative">
+      <section className="py-20 bg-slate-950 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-radial-at-t from-slate-900 via-slate-950 to-slate-950 pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-mono text-gold-400 tracking-widest uppercase mb-3 block">Estresse psicossomático da imigração</span>
-            <h2 className="text-3xl md:text-5xl font-serif font-light tracking-tight leading-tight">
-              O preço invisível de viver no <span className="font-serif italic text-gold-400 font-normal">exterior.</span>
+            <h2 className="text-3xl md:text-5xl font-display font-light tracking-tight leading-snug">
+              O preço invisível de viver no <span className="font-display italic text-gold-400 font-normal">exterior.</span>
             </h2>
             <div className="w-16 h-0.5 bg-gold-500/40 mx-auto mt-6" />
           </div>
 
-          {/* Grid of Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {/* Grid of Cards (Desktop) */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {PAIN_POINTS.map((point) => (
               <div 
                 key={point.id}
@@ -298,14 +282,14 @@ export default function App() {
 
                 {/* Card Number / Badge */}
                 <div className="flex items-center justify-between mb-6">
-                  <span className="font-mono text-xs font-bold text-slate-500 group-hover:text-gold-400 transition-colors">
+                  <span className="font-mono text-xs font-semibold text-slate-500 group-hover:text-gold-400 transition-colors">
                     CASO DE ESTUDO {point.number}
                   </span>
                   <div className="w-2.5 h-2.5 rounded-full bg-slate-800 group-hover:bg-gold-400 transition-colors" />
                 </div>
 
                 {/* Card Title */}
-                <h3 className="font-serif text-lg md:text-xl text-white mb-3 font-normal group-hover:text-gold-300 transition-colors">
+                <h3 className="font-display text-lg md:text-xl text-white mb-3 font-medium group-hover:text-gold-300 transition-colors">
                   {point.title}
                 </h3>
 
@@ -315,6 +299,85 @@ export default function App() {
                 </p>
               </div>
             ))}
+          </div>
+
+          {/* Carousel representing Pain Points (Mobile) */}
+          <div className="block md:hidden relative">
+            <div className="overflow-hidden min-h-[220px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activePainSlide}
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.6}
+                  onDragEnd={(event, info) => {
+                    const swipeThreshold = 50;
+                    if (info.offset.x < -swipeThreshold) {
+                      setActivePainSlide((prev) => (prev < PAIN_POINTS.length - 1 ? prev + 1 : 0));
+                    } else if (info.offset.x > swipeThreshold) {
+                      setActivePainSlide((prev) => (prev > 0 ? prev - 1 : PAIN_POINTS.length - 1));
+                    }
+                  }}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="bg-slate-900 border border-slate-800 rounded-2xl p-6 relative overflow-hidden shadow-xl cursor-grab active:cursor-grabbing touch-pan-y select-none"
+                >
+                  <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full bg-gold-500/5 blur-xl pointer-events-none" />
+                  
+                  <div className="flex items-center justify-between mb-6 pointer-events-none">
+                    <span className="font-mono text-[10px] font-semibold text-gold-400 uppercase tracking-widest">
+                      Caso de Estudo {PAIN_POINTS[activePainSlide].number} de 04
+                    </span>
+                    <div className="w-2 h-2 rounded-full bg-gold-400 animate-pulse" />
+                  </div>
+
+                  <h3 className="font-display text-lg text-white mb-3 font-medium pointer-events-none">
+                    {PAIN_POINTS[activePainSlide].title}
+                  </h3>
+
+                  <p className="text-slate-400 text-xs font-light leading-relaxed pointer-events-none">
+                    {PAIN_POINTS[activePainSlide].description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Dots + Arrows Navigation */}
+            <div className="flex items-center justify-between mt-6 px-1">
+              <button
+                type="button"
+                onClick={() => setActivePainSlide((prev) => (prev > 0 ? prev - 1 : PAIN_POINTS.length - 1))}
+                className="w-10 h-10 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 bg-slate-900 hover:border-slate-700 active:scale-95 transition-all"
+                aria-label="Slide anterior"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              <div className="flex items-center gap-2">
+                {PAIN_POINTS.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setActivePainSlide(idx)}
+                    className={`h-2 rounded-full transition-all ${
+                      activePainSlide === idx ? "bg-gold-500 w-5" : "bg-slate-800 w-2"
+                    }`}
+                    aria-label={`Ir para slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setActivePainSlide((prev) => (prev < PAIN_POINTS.length - 1 ? prev + 1 : 0))}
+                className="w-10 h-10 rounded-full border border-slate-800 flex items-center justify-center text-slate-400 bg-slate-900 hover:border-slate-700 active:scale-95 transition-all"
+                aria-label="Próximo slide"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Prompt under pain points to guide users and trigger empathy */}
@@ -340,47 +403,23 @@ export default function App() {
       </section>
 
       {/* SEÇÃO 3: O Grande Diferencial com Interactive Mapeador */}
-      <section className="py-20 bg-white relative">
+      <section className="py-20 bg-white relative overflow-hidden">
         <div className="absolute top-1/2 right-1/4 w-80 h-80 bg-gold-500/5 blur-[90px] rounded-full pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="max-w-4xl mx-auto px-4">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
-            {/* Column 1: Descriptive text of diferencial requested */}
-            <div className="lg:col-span-6 text-left flex flex-col items-start">
-              
-              <span className="text-xs font-mono text-gold-600 tracking-widest uppercase mb-3 block font-bold">Abordagem Cirúrgica Corporal</span>
-              
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-slate-950 font-normal leading-[1.12] mb-6 tracking-tight">
-                O seu corpo fala o que a sua <span className="font-serif italic font-light text-petrol-700">boca tenta esconder.</span>
-              </h2>
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-xs font-mono text-gold-600 tracking-widest uppercase mb-3 block font-semibold">Abordagem Corporal</span>
+            <h2 className="text-3xl md:text-4xl font-display text-slate-950 font-medium leading-snug mb-4 tracking-tight">
+              Mapeador de Sintomas Corporal
+            </h2>
+            <p className="text-slate-600 text-sm md:text-base font-light">
+              Clique em diferentes áreas do corpo para entender como suas dores físicas e tensões crônicas estão conectadas à sua mente e traços de caráter.
+            </p>
+          </div>
 
-              <p className="text-slate-700 text-sm md:text-base leading-relaxed font-light mb-6">
-                Na terapia convencional, você pode passar meses tentando explicar o que sente em palavras, revirando o passado sem sair do lugar, gerando ainda mais frustração. Na abordagem da Gilsane Cordeiro, o seu corpo é o mapa do tesouro.
-              </p>
-
-              <div className="border-l-2 border-gold-500 pl-4 mb-6 italic text-slate-600 text-sm font-light">
-                Através de um olhar clínico profundo sobre os seus traços faciais, formato de postura, musculatura corporal e expressões correntes, a Gilsane decodifica as couraças e traumas inconscientes que você carrega de modo invisível. 
-              </div>
-
-              <p className="text-slate-700 text-sm md:text-base leading-relaxed font-light mb-8">
-                Nós identificamos com extrema exatidão o que está bloqueando a sua adaptação e o seu potencial de sucesso no exterior olhando para você, literalmente. Não é apenas conversar; é desarmar e soltar os nós que o seu próprio corpo acumulou desde que você tomou a decisão de imigrar.
-              </p>
-
-              <a
-                href={getWhatsAppUrl("Olá Gilsane! Achei fascinante a Análise Corporal e como o corpo expressa dores que tentamos esconder. Gostaria de agendar meu diagnóstico corporal inicial.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="py-3.5 px-6.5 rounded-xl bg-slate-900 hover:bg-slate-950 text-white font-medium transition-all cursor-pointer text-xs uppercase tracking-wider flex items-center gap-2 group font-semibold shadow-md active:scale-[0.99]"
-              >
-                <span>Fazer Meu Diagnóstico Corporal</span>
-                <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 text-gold-400" />
-              </a>
-            </div>
-
-            {/* Column 2: INTERACTIVE BODY MAP (CRO Powerhouse Engagement Tool) */}
-            <div className="lg:col-span-6 bg-slate-950 rounded-3xl p-6 md:p-8 text-white relative shadow-2xl border border-slate-900">
+          {/* INTERACTIVE BODY MAP (CRO Powerhouse Engagement Tool) */}
+          <div className="bg-slate-950 rounded-3xl p-6 md:p-8 text-white relative shadow-2xl border border-slate-900">
               
               <div className="bg-slate-900 py-2 px-4 rounded-xl border border-slate-800 flex justify-between items-center mb-6 text-xs">
                 <span className="font-mono text-gold-400 uppercase tracking-widest font-semibold flex items-center gap-2">
@@ -487,7 +526,7 @@ export default function App() {
                     >
                       <div>
                         <span className="text-[10px] font-mono uppercase text-gold-400 tracking-wider">Análise de Zona</span>
-                        <h4 className="text-lg font-serif text-white mt-1 border-b border-slate-800 pb-2">
+                        <h4 className="text-lg font-display text-white mt-1 border-b border-slate-800 pb-2 font-medium">
                           {bodyPartInsights[activeBodyPart].title}
                         </h4>
                       </div>
@@ -511,17 +550,15 @@ export default function App() {
             </div>
 
           </div>
-
-        </div>
-      </section>
+        </section>
 
       {/* SEÇÃO 4: Para quem é */}
-      <section className="py-20 bg-slate-100/50 relative border-t border-slate-200/40">
+      <section className="py-20 bg-slate-100/50 relative border-t border-slate-200/40 overflow-hidden">
         <div className="max-w-4xl mx-auto px-4">
           
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="text-xs font-mono text-gold-600 tracking-widest uppercase mb-3 block font-bold">Diagnóstico de Encaixe</span>
-            <h2 className="text-3xl md:text-4xl font-serif text-slate-950 font-normal">
+            <span className="text-xs font-mono text-gold-600 tracking-widest uppercase mb-3 block font-semibold">Diagnóstico de Encaixe</span>
+            <h2 className="text-3xl md:text-4xl font-display text-slate-950 font-medium leading-snug">
               Este processo é para você se:
             </h2>
             <p className="text-xs md:text-sm text-slate-500 font-light mt-2">
@@ -529,7 +566,8 @@ export default function App() {
             </p>
           </div>
 
-          <div className="bg-white border border-slate-200/60 rounded-3xl p-6 md:p-10 shadow-xl max-w-3xl mx-auto space-y-6">
+          {/* Desktop view (Static Card list) */}
+          <div className="hidden md:block bg-white border border-slate-200/60 rounded-3xl p-6 md:p-10 shadow-xl max-w-3xl mx-auto space-y-6">
             {FOR_WHOM_ITEMS.map((item, index) => (
               <div 
                 key={item.id} 
@@ -543,6 +581,80 @@ export default function App() {
                 </p>
               </div>
             ))}
+          </div>
+
+          {/* Mobile view (Sleek Carousel) */}
+          <div className="block md:hidden relative max-w-md mx-auto">
+            <div className="overflow-hidden min-h-[160px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeCheckSlide}
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.6}
+                  onDragEnd={(event, info) => {
+                    const swipeThreshold = 50;
+                    if (info.offset.x < -swipeThreshold) {
+                      setActiveCheckSlide((prev) => (prev < FOR_WHOM_ITEMS.length - 1 ? prev + 1 : 0));
+                    } else if (info.offset.x > swipeThreshold) {
+                      setActiveCheckSlide((prev) => (prev > 0 ? prev - 1 : FOR_WHOM_ITEMS.length - 1));
+                    }
+                  }}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="bg-white border border-slate-200/60 rounded-2xl p-6 shadow-md relative overflow-hidden cursor-grab active:cursor-grabbing touch-pan-y select-none"
+                >
+                  <div className="flex items-center gap-3 mb-4 pointer-events-none">
+                    <div className="w-8 h-8 rounded-full bg-gold-100 border border-gold-300 text-gold-700 font-bold flex items-center justify-center text-xs flex-shrink-0">
+                      {activeCheckSlide + 1}
+                    </div>
+                    <span className="font-mono text-[10px] text-slate-400 uppercase tracking-widest font-semibold">
+                      Sintoma {activeCheckSlide + 1} de 4
+                    </span>
+                  </div>
+                  <p className="text-slate-700 text-sm leading-relaxed font-light pointer-events-none">
+                    {FOR_WHOM_ITEMS[activeCheckSlide].text}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Dots + Arrows Navigation */}
+            <div className="flex items-center justify-between mt-6 px-1">
+              <button
+                type="button"
+                onClick={() => setActiveCheckSlide((prev) => (prev > 0 ? prev - 1 : FOR_WHOM_ITEMS.length - 1))}
+                className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 bg-white hover:text-slate-800 shadow-sm active:scale-95 transition-all"
+                aria-label="Indicador anterior"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              <div className="flex items-center gap-2">
+                {FOR_WHOM_ITEMS.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setActiveCheckSlide(idx)}
+                    className={`h-2 rounded-full transition-all ${
+                      activeCheckSlide === idx ? "bg-gold-500 w-5" : "bg-slate-300 w-2"
+                    }`}
+                    aria-label={`Ir para indicador ${idx + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setActiveCheckSlide((prev) => (prev < FOR_WHOM_ITEMS.length - 1 ? prev + 1 : 0))}
+                className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 bg-white hover:text-slate-800 shadow-sm active:scale-95 transition-all"
+                aria-label="Próximo indicador"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           <div className="mt-10 text-center">
@@ -578,21 +690,14 @@ export default function App() {
             <div className="lg:col-span-5 relative flex justify-center">
               <div className="relative w-full max-w-[360px] aspect-[1/1] sm:aspect-[3/4] rounded-[24px] overflow-hidden shadow-2xl bg-slate-100 border-4 border-white">
                 
-                {/* Floating details banner */}
-                <div className="absolute bottom-5 inset-x-5 z-10 bg-slate-950/80 backdrop-blur-md text-white p-4.5 rounded-xl border border-white/10">
-                  <div className="text-xs font-mono text-gold-400 font-bold mb-1">ATENDIMENTO DE EXCELÊNCIA</div>
-                  <p className="text-[10px] text-slate-300 font-light leading-normal">
-                    Foco no equilíbrio emocional e resgate de identidade cultural para quem vive distante das suas origens brasileiras.
-                  </p>
-                </div>
 
-            <img 
-              src={gilsaneLaptop} 
-              alt="Gilsane Cordeiro em atendimento em seu consultório" 
-              className="w-full h-auto object-cover antialiased transition-transform duration-700 hover:scale-[1.02]"
-              style={{ imageRendering: 'auto', transform: 'translateZ(0)' }}
-              referrerPolicy="no-referrer"
-            />
+          <img 
+            src={gilsaneLaptop} 
+            alt="Gilsane Cordeiro em atendimento em seu consultório" 
+            className="w-full h-auto object-cover antialiased transition-transform duration-700 hover:scale-[1.02]"
+            style={{ imageRendering: 'auto', transform: 'translateZ(0)' }}
+            referrerPolicy="no-referrer"
+          />
                 <div className="absolute top-4 right-4 bg-slate-950/80 text-white rounded-full p-2 border border-white/10 flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider px-3.5">
                   <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping" />
                   Online Global
@@ -603,9 +708,9 @@ export default function App() {
             {/* Verbatim Analyst copy block of section 5 */}
             <div className="lg:col-span-7 text-left flex flex-col items-start justify-center">
               
-              <span className="text-xs font-mono text-gold-600 tracking-widest uppercase mb-3 block font-bold">Diretora Clínica</span>
+              <span className="text-xs font-mono text-gold-600 tracking-widest uppercase mb-3 block font-semibold">Diretora Clínica</span>
               
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-slate-950 font-normal leading-tight mb-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-display text-slate-950 font-medium leading-snug mb-6">
                 Quem é Gilsane Cordeiro?
               </h2>
 
@@ -670,10 +775,10 @@ export default function App() {
 
         <div className="max-w-5xl mx-auto px-4 relative z-10 text-center">
           
-          <span className="text-xs font-mono text-gold-400 tracking-widest uppercase mb-4 block font-bold">Agende de Qualquer Lugar</span>
+          <span className="text-xs font-mono text-gold-400 tracking-widest uppercase mb-4 block font-semibold">Agende de Qualquer Lugar</span>
           
-          <h2 className="text-3xl md:text-5xl font-serif font-light text-white mb-4 leading-tight tracking-tight">
-            Dê o primeiro passo sem sair de <span className="font-serif italic font-normal text-gold-400">casa.</span>
+          <h2 className="text-3xl md:text-5xl font-display font-light text-white mb-4 leading-snug tracking-tight">
+            Dê o primeiro passo sem sair de <span className="font-display italic font-medium text-gold-400">casa.</span>
           </h2>
 
           <p className="text-sm md:text-base lg:text-lg text-slate-350 font-light max-w-3xl mx-auto mb-12 leading-relaxed">
@@ -682,15 +787,15 @@ export default function App() {
 
           <div className="max-w-xl mx-auto mb-10">
             {/* Dynamic context warning */}
-            <div className="bg-slate-900 border border-slate-800 p-4.5 rounded-2xl flex items-center justify-between gap-4 text-left text-xs mb-6">
-              <div className="flex items-center gap-3">
+            <div className="bg-slate-900 border border-slate-800 p-4.5 rounded-2xl flex flex-col sm:flex-row items-center sm:items-center justify-between gap-4 text-center sm:text-left text-xs mb-6">
+              <div className="flex flex-col sm:flex-row items-center gap-3">
                 <Video className="w-5 h-5 text-gold-400 flex-shrink-0 animate-pulse" />
                 <div>
                   <div className="text-slate-200 font-medium">Atendimento On-line Zoom/Meet</div>
                   <div className="text-slate-450 text-[11px] font-light">Privado, seguro e de alta resolução técnica.</div>
                 </div>
               </div>
-              <div className="text-gold-400 font-semibold uppercase tracking-wider text-[10px] border border-gold-500/30 rounded py-1 px-2">
+              <div className="text-gold-400 font-semibold uppercase tracking-wider text-[10px] border border-gold-500/30 rounded py-1 px-2 flex-shrink-0">
                 Fuso GMT/GMT+1
               </div>
             </div>
@@ -706,7 +811,7 @@ export default function App() {
                 href={getWhatsAppUrl("Olá Gilsane! Quero agendar minha análise corporal e iniciar meu tratamento online.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-5 px-8 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-extrabold tracking-wider transition-all shadow-xl shadow-emerald-950/40 hover:scale-[1.01] text-sm md:text-base text-center flex items-center justify-center gap-3 cursor-pointer group uppercase animate-cta-pulse"
+                className="w-full py-5 px-8 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold tracking-wide transition-all shadow-xl shadow-emerald-950/40 hover:scale-[1.01] text-sm md:text-base text-center flex items-center justify-center gap-3 cursor-pointer group uppercase animate-cta-pulse"
               >
                 <span>Quero Agendar Minha Análise e Iniciar Meu Tratamento</span>
                 <ChevronRight className="w-5 h-5 text-gold-200 transition-transform group-hover:translate-x-1" />
@@ -728,7 +833,7 @@ export default function App() {
       <footer className="bg-slate-950 border-t border-slate-900 py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
-            <span className="font-serif text-lg font-semibold text-white tracking-tight">Gilsane Cordeiro</span>
+            <span className="font-display text-lg font-semibold text-white tracking-tight">Gilsane Cordeiro</span>
             <p className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mt-1">
               Clínica de Análise Corporal & Psicoterapia para Imigrantes
             </p>
@@ -743,7 +848,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Floating social proof / Live Event lead popup (CRO CRO CRO) */}
+      {/* Floating social proof / Live Event lead popup (CRO CRO CRO) - Desktop only */}
       <AnimatePresence>
         {currentLeadToast && !userLeadInfo && (
           <motion.div
@@ -751,7 +856,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0, x: 0 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="fixed bottom-4 left-4 right-4 sm:right-auto sm:max-w-sm bg-slate-900 border border-slate-800 text-white p-4 rounded-xl shadow-2xl z-50 flex items-start gap-3.5"
+            className="hidden sm:flex fixed bottom-4 left-4 sm:max-w-sm bg-slate-900 border border-slate-800 text-white p-4 rounded-xl shadow-2xl z-50 items-start gap-3.5"
           >
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse mt-1.5 flex-shrink-0" />
             
@@ -773,6 +878,24 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href={getWhatsAppUrl()}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 group flex items-center gap-3 focus:outline-none"
+        aria-label="Fale conosco no WhatsApp"
+      >
+        <span className="hidden md:inline-block bg-slate-900/95 backdrop-blur-sm text-white text-[11px] font-sans tracking-wide py-1.5 px-3 rounded-lg border border-slate-800 shadow-xl opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0 pointer-events-none">
+          Falar com Gilsane
+        </span>
+        <div className="relative w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95">
+          {/* Pulse Ripple Effect */}
+          <span className="absolute inset-0 rounded-full bg-[#25D366]/40 animate-ping" />
+          <MessageCircle className="w-7 h-7 relative z-10 transition-transform duration-300 group-hover:rotate-12" />
+        </div>
+      </a>
 
     </div>
   );

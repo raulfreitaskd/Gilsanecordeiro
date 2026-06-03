@@ -80,8 +80,8 @@ export default function LeadQuiz({ onLeadSuccess }: LeadQuizProps) {
     const countryClean = countryObj ? countryObj.name : "Exterior";
     const symptomClean = symptomObj ? symptomObj.label : "Esgotamento emocional";
 
-    const text = `Olá Gilsane! Finalizei meu diagnóstico na Landing Page. Meu nome é ${name}, moro em ${countryClean} e sinto principalmente: ${symptomClean}. Gostaria de agendar minha sessão de Análise Corporal e Psicoterapia.`;
-    return `https://api.whatsapp.com/send?phone=351910238128&text=${encodeURIComponent(text)}`; // European code phone as placeholder, direct link
+    const text = `Olá, vim do site e gostaria de mais informções. Finalizei meu diagnóstico na Landing Page: meu nome é ${name}, moro em ${countryClean} e sinto principalmente: ${symptomClean}. Gostaria de agendar minha sessão de Análise Corporal e Psicoterapia.`;
+    return `https://api.whatsapp.com/send?phone=553388613561&text=${encodeURIComponent(text)}`; // Updated with Brazilian telephone and custom phrase prefix
   };
 
   return (
@@ -128,7 +128,7 @@ export default function LeadQuiz({ onLeadSuccess }: LeadQuizProps) {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <h3 className="text-xl md:text-2xl font-serif text-white mb-2 leading-tight">
+            <h3 className="text-xl md:text-2xl font-display font-medium text-white mb-2 leading-snug">
               Onde você está residindo atualmente?
             </h3>
             <p className="text-sm text-petrol-200 mb-6 font-light">
@@ -165,7 +165,7 @@ export default function LeadQuiz({ onLeadSuccess }: LeadQuizProps) {
 
             <button
               onClick={handleNextStep}
-              className="w-full py-4.5 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-slate-950 font-bold rounded-xl shadow-lg transition-all hover:scale-[1.01] flex items-center justify-center gap-2 cursor-pointer text-sm tracking-wider uppercase"
+              className="w-full py-4.5 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-slate-950 font-semibold rounded-xl shadow-lg transition-all hover:scale-[1.01] flex items-center justify-center gap-2 cursor-pointer text-sm tracking-wider uppercase"
             >
               Próxima Etapa <ChevronRight className="w-4 h-4" />
             </button>
@@ -180,7 +180,7 @@ export default function LeadQuiz({ onLeadSuccess }: LeadQuizProps) {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <h3 className="text-xl md:text-2xl font-serif text-white mb-2 leading-tight">
+            <h3 className="text-xl md:text-2xl font-display font-medium text-white mb-2 leading-snug">
               Qual é o sinal que o seu corpo deu de que chegou ao limite?
             </h3>
             <p className="text-sm text-petrol-200 mb-6 font-light">
@@ -221,7 +221,7 @@ export default function LeadQuiz({ onLeadSuccess }: LeadQuizProps) {
 
             <button
               onClick={handleNextStep}
-              className="w-full py-4.5 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-slate-950 font-bold rounded-xl shadow-lg transition-all hover:scale-[1.01] flex items-center justify-center gap-2 cursor-pointer text-sm tracking-wider uppercase"
+              className="w-full py-4.5 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-slate-950 font-semibold rounded-xl shadow-lg transition-all hover:scale-[1.01] flex items-center justify-center gap-2 cursor-pointer text-sm tracking-wider uppercase"
             >
               Continuar <ChevronRight className="w-4 h-4" />
             </button>
@@ -236,7 +236,7 @@ export default function LeadQuiz({ onLeadSuccess }: LeadQuizProps) {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <h3 className="text-xl md:text-2xl font-serif text-white mb-2 leading-tight">
+            <h3 className="text-xl md:text-2xl font-display font-medium text-white mb-2 leading-snug">
               Preencha seus dados para receber o retorno
             </h3>
             <p className="text-sm text-petrol-200 mb-6 font-light">
@@ -263,7 +263,7 @@ export default function LeadQuiz({ onLeadSuccess }: LeadQuizProps) {
               </div>
 
               <div>
-                <label className="block text-xs font-mono text-slate-400 mb-1.5 uppercase tracking-wider">WhatsApp com DDD (Ex: +351...)+ </label>
+                <label className="block text-xs font-mono text-slate-400 mb-1.5 uppercase tracking-wider">WhatsApp com DDD (Ex: +55 33 ...)</label>
                 <div className="relative">
                   <Phone className="absolute left-3.5 top-3.5 w-5 h-5 text-slate-500" />
                   <input
@@ -273,7 +273,7 @@ export default function LeadQuiz({ onLeadSuccess }: LeadQuizProps) {
                       setWhatsapp(e.target.value);
                       setError("");
                     }}
-                    placeholder="Ex: +351 912 345 678"
+                    placeholder="Ex: +55 33 98861-3561"
                     className="w-full bg-slate-950/80 border border-slate-800 rounded-xl py-3 pl-11 pr-4 text-white text-sm placeholder-slate-600 focus:outline-none focus:border-gold-500 transition-all font-light"
                     required
                   />
@@ -292,7 +292,7 @@ export default function LeadQuiz({ onLeadSuccess }: LeadQuizProps) {
 
               <button
                 type="submit"
-                className="w-full py-4.5 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-slate-950 font-bold rounded-xl shadow-lg transition-all hover:scale-[1.01] flex items-center justify-center gap-2 cursor-pointer text-sm tracking-wider uppercase mt-4"
+                className="w-full py-4.5 bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-600 hover:to-gold-700 text-slate-950 font-semibold rounded-xl shadow-lg transition-all hover:scale-[1.01] flex items-center justify-center gap-2 cursor-pointer text-sm tracking-wider uppercase mt-4"
               >
                 Salvar Pré-Avaliação <Send className="w-4 h-4" />
               </button>
@@ -312,7 +312,7 @@ export default function LeadQuiz({ onLeadSuccess }: LeadQuizProps) {
               <CheckCircle2 className="w-8 h-8" />
             </div>
 
-            <h3 className="text-2xl md:text-3xl font-serif text-white mb-3">
+            <h3 className="text-2xl md:text-3xl font-display font-medium text-white mb-3">
               Mapeamento de Sintoma Concluído!
             </h3>
             <p className="text-base text-petrol-100 max-w-md mx-auto mb-6 leading-relaxed font-light">
