@@ -26,7 +26,7 @@ export default function FAQ() {
         </div>
 
         <h2 className="text-3xl md:text-4xl font-display font-medium text-center text-slate-900 mb-4 leading-snug">
-          Como funciona a psicoterapia com base no corpo?
+          Como funciona a terapia com base no corpo?
         </h2>
         <p className="text-sm md:text-base text-center text-slate-600 max-w-2xl mx-auto mb-16 font-light leading-relaxed">
           Entenda como Gilsane Cordeiro realiza diagnósticos profundos e sessões particulares de acolhimento totalmente online para brasileiros que residem em qualquer país europeu.

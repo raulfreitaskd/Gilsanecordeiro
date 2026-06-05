@@ -22,7 +22,7 @@ import {
   HelpCircle,
   MessageCircle
 } from "lucide-react";
-import { PAIN_POINTS, FOR_WHOM_ITEMS } from "./data";
+import { PAIN_POINTS, FOR_WHOM_ITEMS, BODY_SHAPES, BodyShape } from "./data";
 import FAQ from "./components/FAQ";
 
 const WHATSAPP_NUMBER = "553388613561";
@@ -37,7 +37,7 @@ import gilsanePortrait from "./assets/images/Gil_book.jpg";
 import gilsaneLaptop from "./assets/images/Gil-laptop.webp";
 import gilsanePerfil from "./assets/images/gil_perfil.jpg";
 
-type BodyPart = "head" | "shoulders" | "core" | "legs";
+
 
 interface ActiveLeadNotice {
   name: string;
@@ -54,7 +54,7 @@ const LIVE_LEADS: ActiveLeadNotice[] = [
 ];
 
 export default function App() {
-  const [activeBodyPart, setActiveBodyPart] = useState<BodyPart>("head");
+  const [activeShapeId, setActiveShapeId] = useState<"esquizoide" | "oral" | "psicopata" | "masoquista" | "rigido">("esquizoide");
   const [currentLeadToast, setCurrentLeadToast] = useState<ActiveLeadNotice | null>(null);
   const [toastIndex, setToastIndex] = useState(0);
   const [userLeadInfo, setUserLeadInfo] = useState<{ name: string; country: string; symptom: string } | null>(null);
@@ -87,30 +87,6 @@ export default function App() {
     const element = document.getElementById("diagnostic-quiz");
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  };
-
-  // Human body mapping textual insights
-  const bodyPartInsights = {
-    head: {
-      title: "O Olhar e a Fisionomia (Rosto)",
-      description: "O formato do queixo, a expressão dos olhos e a rigidez maxilar revelam excesso de racionalização e controle emocional. Gilsane analisa cada traço para diagnosticar a dor inconsciente de quem está sempre em alerta no exterior, forçando-se a parecer inabalável.",
-      symptom: "Isolamento existencial, dores de cabeça constantes e insônia profunda."
-    },
-    shoulders: {
-      title: "Ombros e Pescoço (A Sobrecarga)",
-      description: "O enrijecimento do músculo trapézio e o pescoço tensionado representam o peso das responsabilidades absorvidas sozinho. No exterior, sem rede de apoio física, você herda corporalmente o peso de ter que 'carregar tudo nas costas'.",
-      symptom: "Dores agudas na cervical, nódulos de tensão permanente e estresse matinal."
-    },
-    core: {
-      title: "O Estômago e Core (As Couraças do Medo)",
-      description: "A compressão abdominal e o estresse gástrico constante são reflexos de um corpo cronicamente em estado de luta ou fuga. O medo de cometer erros, falhar em um novo país ou ser rejeitado atua de modo corrosivo na musculatura do core.",
-      symptom: "Gastrite nervosa, respiração curta e ansiedade generalizada."
-    },
-    legs: {
-      title: "Base e Pernas (Falta de Apoio e Solo)",
-      description: "A sensação permanente de instabilidade após mudar de país deixa marcas na fisionomia e postura de base das pernas. É o peso invisível de ter sido arrancado de suas raízes originais no Brasil para se reestruturar do zero na Europa.",
-      symptom: "Cansaço extremo nas pernas, falta de aterramento físico e apatia corporal."
     }
   };
 
@@ -204,10 +180,11 @@ export default function App() {
             {/* Subheading Verbatim Copy with gold CRO highlighter markers */}
             <p className="text-sm md:text-base lg:text-lg text-slate-700 font-light leading-relaxed mb-8 max-w-2xl">
               <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">Longe da família</span>, sem rede de apoio e sob a <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">pressão constante</span> de dar certo, você se obrigou a <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">ser forte</span>. 
-              Mas o seu corpo de hoje, travado por uma <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">fadiga inexplicável</span>, a insônia crônica e a <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">ansiedade</span> persistente mostram que você <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">chegou ao limite</span>. 
+              Mas o seu corpo de hoje, travado por uma <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">fadiga inexplicável</span>, a insônia crônica e a <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">ansiedade persistente</span> mostram que você <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">chegou ao limite</span>. 
               E você não vai precisar passar meses <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">tentando explicar</span> com palavras cansadas o que sente no peito: 
-              através de uma <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">metodologia profunda</span> e focada, a Gilsane analisa de forma cirúrgica o formato do seu corpo e os traços da fisionomia para entregar um <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">diagnóstico exato</span> — <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">e aparentemente inexplicável</span> — das dores que você tenta esconder do mundo. 
-              É o <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">alívio imediato</span> que você precisa, sem enrolação.
+              através de uma <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">metodologia profunda</span> e focada, a Gilsane analisa de forma cirúrgica o formato do seu corpo e os traços da fisionomia para entregar um <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">diagnóstico exato</span> e aparentemente inexplicável das dores que você tenta esconder do mundo. 
+              É o <span className="bg-gold-500/10 text-gold-700 px-1.5 py-[1px] rounded font-medium mx-0.5">alívio imediato</span> que você precisa, sem enrolação. 
+              <span className="block mt-4 text-slate-950 font-semibold tracking-wide border-l-2 border-gold-500 pl-3">O FORMATO DO SEU CORPO EXPLICA SUA MENTE.</span>
             </p>
 
             {/* Micro Benefits list under the main CTA */}
@@ -402,167 +379,212 @@ export default function App() {
         </div>
       </section>
 
-      {/* SEÇÃO 3: O Grande Diferencial com Interactive Mapeador */}
+      {/* SEÇÃO 3: Os 5 Formatos de Corpo da Análise Corporal */}
       <section className="py-20 bg-white relative overflow-hidden">
         <div className="absolute top-1/2 right-1/4 w-80 h-80 bg-gold-500/5 blur-[90px] rounded-full pointer-events-none" />
 
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-mono text-gold-600 tracking-widest uppercase mb-3 block font-semibold">Abordagem Corporal</span>
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <span className="text-xs font-mono text-gold-600 tracking-widest uppercase mb-3 block font-semibold">ANÁLISE DE FORMATO DO CORPO</span>
             <h2 className="text-3xl md:text-4xl font-display text-slate-950 font-medium leading-snug mb-4 tracking-tight">
-              Mapeador de Sintomas Corporal
+              O Formato do seu corpo revela suas dores e também os seus recursos
             </h2>
             <p className="text-slate-600 text-sm md:text-base font-light">
-              Clique em diferentes áreas do corpo para entender como suas dores físicas e tensões crônicas estão conectadas à sua mente e traços de caráter.
+              Através da ANÁLISE CORPORAL, Gilsane pode te ajudar a resolver qualquer tipo de problema, medo ou circunstâncias que você esteja passando.
             </p>
           </div>
 
-          {/* INTERACTIVE BODY MAP (CRO Powerhouse Engagement Tool) */}
-          <div className="bg-slate-950 rounded-3xl p-6 md:p-8 text-white relative shadow-2xl border border-slate-900">
+          {/* INTERACTIVE BODY SHAPES CONTAINER (CRO Powerhouse Engagement Tool) */}
+          <div className="bg-slate-950 rounded-3xl p-6 md:p-10 text-white relative shadow-2xl border border-slate-900">
               
-              <div className="bg-slate-900 py-2 px-4 rounded-xl border border-slate-800 flex justify-between items-center mb-6 text-xs">
+              <div className="bg-slate-900 py-2.5 px-4 rounded-xl border border-slate-800 flex justify-between items-center mb-8 text-xs">
                 <span className="font-mono text-gold-400 uppercase tracking-widest font-semibold flex items-center gap-2">
-                  <Activity className="w-3.5 h-3.5 text-gold-500 animate-pulse" /> Mapeador de Sintomas Corporal
+                  <Activity className="w-3.5 h-3.5 text-gold-500 animate-pulse" /> Mapeador dos 5 Formatos Corporais
                 </span>
-                <span className="text-slate-400 font-light">Clique em um ponto do corpo</span>
+                <span className="text-slate-400 font-light hidden sm:inline">Selecione o formato para ver o mapeamento</span>
               </div>
 
-              {/* Main Map Box */}
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                
-                {/* SVG Human Figure with clickable buttons */}
-                <div className="md:col-span-5 flex justify-center py-4 relative">
-                  
-                  {/* Human Figure SVG */}
-                  <svg className="w-40 h-72 text-slate-700" viewBox="0 0 100 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    {/* Head */}
-                    <circle 
-                      cx="50" cy="24" r="14" 
-                      className={`cursor-pointer transition-all ${activeBodyPart === "head" ? "fill-gold-500/40 stroke-gold-400 stroke-2" : "fill-slate-800/50 stroke-slate-600 hover:fill-slate-800"}`}
-                      onClick={() => setActiveBodyPart("head")}
-                    />
-                    {/* Neck / Shoulders */}
-                    <path 
-                      d="M30 45 L70 45 L72 65 L28 65 Z" 
-                      className={`cursor-pointer transition-all ${activeBodyPart === "shoulders" ? "fill-gold-500/40 stroke-gold-400 stroke-2" : "fill-slate-800/50 stroke-slate-600 hover:fill-slate-800"}`}
-                      onClick={() => setActiveBodyPart("shoulders")}
-                    />
-                    {/* Core / Torso */}
-                    <path 
-                      d="M32 68 L68 68 L64 125 L36 125 Z" 
-                      className={`cursor-pointer transition-all ${activeBodyPart === "core" ? "fill-gold-500/40 stroke-gold-400 stroke-2" : "fill-slate-800/50 stroke-slate-600 hover:fill-slate-800"}`}
-                      onClick={() => setActiveBodyPart("core")}
-                    />
-                    {/* Legs / Support */}
-                    <path 
-                      d="M38 128 L62 128 L62 195 L52 195 L50 145 L48 145 L46 195 L38 195 Z" 
-                      className={`cursor-pointer transition-all ${activeBodyPart === "legs" ? "fill-gold-500/40 stroke-gold-400 stroke-2" : "fill-slate-800/50 stroke-slate-600 hover:fill-slate-800"}`}
-                      onClick={() => setActiveBodyPart("legs")}
-                    />
-                  </svg>
-
-                  {/* Hotspot absolute indicators for mobile clickability support */}
-                  <div className="absolute top-8 left-[52%] -translate-x-1/2">
-                    <button 
-                      type="button"
-                      onClick={() => setActiveBodyPart("head")}
-                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold border transition-all cursor-pointer ${
-                        activeBodyPart === "head" ? "bg-gold-500 text-slate-950 border-white" : "bg-slate-800 text-white border-slate-700"
+              {/* Grid / Row of clickable geometry shape cards */}
+              <div className="flex overflow-x-auto md:grid md:grid-cols-5 gap-3.5 pb-6 md:pb-8 scrollbar-none snap-x snap-mandatory">
+                {BODY_SHAPES.map((shape) => {
+                  const isActive = activeShapeId === shape.id;
+                  return (
+                    <button
+                      key={shape.id}
+                      onClick={() => setActiveShapeId(shape.id)}
+                      className={`snap-center shrink-0 w-[180px] md:w-auto p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center text-center cursor-pointer ${
+                        isActive
+                          ? "bg-slate-900 border-gold-400/80 shadow-lg shadow-gold-500/10 scale-[1.02]"
+                          : "bg-slate-950 border-slate-850 hover:bg-slate-900/60 hover:border-slate-800"
                       }`}
                     >
-                      A
-                    </button>
-                  </div>
+                      {/* Geometric Representation */}
+                      <div className="mb-4 flex items-center justify-center p-1 rounded-full relative w-16 h-20">
+                        <svg className="w-12 h-16 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 48 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          {/* 1. Underlying subtle clinical human body silhouette */}
+                          <g className={`transition-opacity duration-300 ${isActive ? "opacity-35" : "opacity-15"}`}>
+                            {/* Stylized Head */}
+                            <circle cx="24" cy="11" r="5" className="fill-slate-100" />
+                            {/* Stylized Neck */}
+                            <rect x="22.5" y="17" width="3" height="3" rx="0.5" className="fill-slate-100" />
+                            {/* Stylized Torso and shoulders */}
+                            <path d="M14 21h20c1.5 0 2.5 1 2.5 2.5 v12c0 1.5-1 2.5-2.5 2.5H14c-1.5 0-2.5-1-2.5-2.5v-12C11.5 22 12.5 21 14 21z" className="fill-slate-100" />
+                            {/* Stylized Hips/Legs base */}
+                            <path d="M16 35h16v20H27.5v-7h-7v7H16v-20z" className="fill-slate-100" />
+                          </g>
 
-                  <div className="absolute top-22 left-[52%] -translate-x-1/2">
-                    <button 
-                      type="button"
-                      onClick={() => setActiveBodyPart("shoulders")}
-                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold border transition-all cursor-pointer ${
-                        activeBodyPart === "shoulders" ? "bg-gold-500 text-slate-950 border-white" : "bg-slate-800 text-white border-slate-700"
-                      }`}
-                    >
-                      B
-                    </button>
-                  </div>
-
-                  <div className="absolute top-36 left-[52%] -translate-x-1/2">
-                    <button 
-                      type="button"
-                      onClick={() => setActiveBodyPart("core")}
-                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold border transition-all cursor-pointer ${
-                        activeBodyPart === "core" ? "bg-gold-500 text-slate-950 border-white" : "bg-slate-800 text-white border-slate-700"
-                      }`}
-                    >
-                      C
-                    </button>
-                  </div>
-
-                  <div className="absolute top-52 left-[52%] -translate-x-1/2">
-                    <button 
-                      type="button"
-                      onClick={() => setActiveBodyPart("legs")}
-                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold border transition-all cursor-pointer ${
-                        activeBodyPart === "legs" ? "bg-gold-500 text-slate-950 border-white" : "bg-slate-800 text-white border-slate-700"
-                      }`}
-                    >
-                      D
-                    </button>
-                  </div>
-
-                </div>
-
-                {/* Hotspot details side-bar */}
-                <div className="md:col-span-7 flex flex-col justify-center min-h-[220px]">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={activeBodyPart}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.2 }}
-                      className="space-y-4"
-                    >
-                      <div>
-                        <span className="text-[10px] font-mono uppercase text-gold-400 tracking-wider">Análise de Zona</span>
-                        <h4 className="text-lg font-display text-white mt-1 border-b border-slate-800 pb-2 font-medium">
-                          {bodyPartInsights[activeBodyPart].title}
-                        </h4>
+                          {/* 2. Top-layered geometric diagnostic shape superimposition */}
+                          {shape.shapeType === "rectangle" && (
+                            <rect 
+                              x="18" y="18" width="12" height="24" rx="1.5" 
+                              className={`transition-all duration-350 fill-none ${
+                                isActive 
+                                  ? "stroke-sky-400 stroke-[2] [filter:drop-shadow(0_0_4px_rgba(56,189,248,0.7))]" 
+                                  : "stroke-sky-500/50 stroke-[1.5]"
+                              }`} 
+                            />
+                          )}
+                          {shape.shapeType === "circle" && (
+                            <circle 
+                              cx="24" cy="29.5" r="9" 
+                              className={`transition-all duration-350 fill-none ${
+                                isActive 
+                                  ? "stroke-pink-400 stroke-[2] [filter:drop-shadow(0_0_4px_rgba(244,114,182,0.7))]" 
+                                  : "stroke-pink-500/50 stroke-[1.5]"
+                              }`} 
+                            />
+                          )}
+                          {shape.shapeType === "triangle" && (
+                            <polygon 
+                              points="13,21.5 35,21.5 24,37" 
+                              className={`transition-all duration-350 fill-none ${
+                                isActive 
+                                  ? "stroke-amber-400 stroke-[2] [filter:drop-shadow(0_0_4px_rgba(245,158,11,0.7))]" 
+                                  : "stroke-amber-500/50 stroke-[1.5]"
+                              }`} 
+                            />
+                          )}
+                          {shape.shapeType === "square" && (
+                            <rect 
+                              x="15" y="21.5" width="18" height="18" rx="2.5" 
+                              className={`transition-all duration-350 fill-none ${
+                                isActive 
+                                  ? "stroke-emerald-400 stroke-[2] [filter:drop-shadow(0_0_4px_rgba(52,211,153,0.7))]" 
+                                  : "stroke-emerald-500/50 stroke-[1.5]"
+                              }`} 
+                            />
+                          )}
+                          {shape.shapeType === "hourglass" && (
+                            <path 
+                              d="M15 21 h18 L24 29.5 L33 38 H15 L24 29.5 Z" 
+                              className={`transition-all duration-350 fill-none ${
+                                isActive 
+                                  ? "stroke-violet-400 stroke-[2] [filter:drop-shadow(0_0_4px_rgba(167,139,250,0.7))]" 
+                                  : "stroke-violet-500/50 stroke-[1.5]"
+                              }`} 
+                            />
+                          )}
+                        </svg>
                       </div>
 
-                      <p className="text-slate-350 text-xs md:text-sm font-light leading-relaxed">
-                        {bodyPartInsights[activeBodyPart].description}
-                      </p>
-
-                      <div className="bg-slate-900 border border-slate-850 p-3 rounded-lg flex items-center gap-2.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
-                        <span className="text-slate-200 text-xs font-light">
-                          <strong className="text-slate-100 font-medium">Sintomas comuns:</strong> {bodyPartInsights[activeBodyPart].symptom}
-                        </span>
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-
+                      <span className={`text-sm tracking-wide font-medium block uppercase ${isActive ? "text-gold-300 font-semibold" : "text-slate-300"}`}>
+                        {shape.name}
+                      </span>
+                      <span className="text-[10px] font-mono text-slate-500 block mt-1.5 uppercase tracking-widest">
+                        {shape.geometry}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
 
-            </div>
+              {/* Selected Shape Detail Panel */}
+              {(() => {
+                const selectedShape = BODY_SHAPES.find(s => s.id === activeShapeId);
+                if (!selectedShape) return null;
+                return (
+                  <div className="bg-slate-900 border border-slate-850 rounded-2xl p-5 md:p-8 min-h-[280px]">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={selectedShape.id}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -12 }}
+                        transition={{ duration: 0.25 }}
+                        className="grid grid-cols-1 md:grid-cols-12 gap-6"
+                      >
+                        {/* Summary side */}
+                        <div className="md:col-span-5 flex flex-col justify-start space-y-4">
+                          <div>
+                            <span className="text-[10px] font-mono uppercase text-gold-400 tracking-widest block font-semibold mb-1">
+                              Geometria: {selectedShape.geometry}
+                            </span>
+                            <h3 className="text-2xl md:text-3xl font-display font-medium text-white tracking-tight">
+                              {selectedShape.name}
+                            </h3>
+                            <p className="text-slate-400 text-xs md:text-sm font-light italic mt-1.5">
+                              {selectedShape.subtitle}
+                            </p>
+                          </div>
+
+                          <div className="bg-slate-950 border border-slate-850 p-4.5 rounded-xl">
+                            <span className="text-[10px] font-mono uppercase text-rose-450 block tracking-widest font-semibold mb-1">
+                              Dor Inconsciente Central
+                            </span>
+                            <span className="text-slate-100 text-sm md:text-base font-medium leading-tight block">
+                              {selectedShape.pain}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Symptoms side */}
+                        <div className="md:col-span-7 flex flex-col justify-between space-y-5">
+                          <div className="space-y-3">
+                            <span className="text-[10px] font-mono uppercase text-teal-400 block tracking-widest font-semibold mb-2">
+                              Sinais e Sintomas Comuns
+                            </span>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                              {selectedShape.symptoms.map((symptom, sIdx) => (
+                                <div key={sIdx} className="flex items-center gap-2.5 bg-slate-950/30 border border-slate-850 p-2.5 rounded-lg">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-gold-400 flex-shrink-0" />
+                                  <span className="text-slate-350 text-xs font-light leading-relaxed">
+                                    {symptom}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Phrase Quote Accent bar */}
+                          <div className="bg-gradient-to-r from-gold-500/10 via-amber-500/5 to-transparent border-l-2 border-gold-500 p-4.5 rounded-r-xl">
+                            <p className="text-gold-200 text-xs md:text-sm font-medium italic tracking-wide leading-relaxed">
+                              {selectedShape.phrase}
+                            </p>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                );
+              })()}
 
           </div>
-        </section>
+
+        </div>
+      </section>
 
       {/* SEÇÃO 4: Para quem é */}
       <section className="py-20 bg-slate-100/50 relative border-t border-slate-200/40 overflow-hidden">
         <div className="max-w-4xl mx-auto px-4">
           
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="text-xs font-mono text-gold-600 tracking-widest uppercase mb-3 block font-semibold">Diagnóstico de Encaixe</span>
+          <div className="text-center max-w-3xl mx-auto mb-14">
+            <span className="text-xs font-mono text-gold-600 tracking-widest uppercase mb-3 block font-semibold">DIAGNÓSTICO DE TRAÇOS</span>
             <h2 className="text-3xl md:text-4xl font-display text-slate-950 font-medium leading-snug">
               Este processo é para você se:
             </h2>
-            <p className="text-xs md:text-sm text-slate-500 font-light mt-2">
-              Analise criteriosamente os pontos abaixo. Se você se reconhece em 2 ou mais deles, seu corpo já acendeu o alerta vermelho.
+            <p className="text-slate-600 text-sm font-light mt-4 leading-relaxed max-w-2xl mx-auto">
+              Analise criteriosamente o formato do seu corpo. Se você se reconhece em 2 ou mais deles, significa que suas dores variam e você tem um conflito interno que a Análise cirúrgica de Gilsane pode mudar esse cenário de dor para uma vida de sucesso.
             </p>
           </div>
 
@@ -719,7 +741,7 @@ export default function App() {
                   Gilsane Cordeiro é Psicanalista formada e especialista em Análise Corporal. Com uma trajetória dedicada a decodificar as profundezas da mente humana, ela desenvolveu uma sensibilidade clínica rara: a capacidade de traduzir o que o inconsciente expressa através do corpo.
                 </p>
                 <p>
-                  Para a Gilsane, a sua fisionomia, a sua postura e o formato do seu corpo contam a história exata dos traumas, defesas e dores que você carrega — mesmo aqueles que você tenta esconder de si mesmo de modo incansável.
+                  Para a Gilsane, o formato do seu corpo conta a história exata dos traumas, defesas e dores que você carrega - mesmo aqueles que você tenta esconder de si mesmo de modo incansável.
                 </p>
                 <p>
                   Unindo a precisão técnica da psicanálise ao diagnóstico visual da análise corporal, ela atua de forma cirúrgica e sem rodeios. Seu foco é devolver a identidade, o chão e o alívio emocional para brasileiros que estão enfrentando a solidão e o esgotamento extremo de viver no exterior. Uma profissional de confiança para guiar você de volta ao seu equilíbrio, de qualquer lugar do mundo.
@@ -835,7 +857,7 @@ export default function App() {
           <div className="text-center md:text-left">
             <span className="font-display text-lg font-semibold text-white tracking-tight">Gilsane Cordeiro</span>
             <p className="text-[11px] font-mono text-slate-500 uppercase tracking-wider mt-1">
-              Clínica de Análise Corporal & Psicoterapia para Imigrantes
+              Clínica de Análise Corporal & Terapia para Imigrantes
             </p>
           </div>
           

@@ -80,7 +80,7 @@ export default function LeadQuiz({ onLeadSuccess }: LeadQuizProps) {
     const countryClean = countryObj ? countryObj.name : "Exterior";
     const symptomClean = symptomObj ? symptomObj.label : "Esgotamento emocional";
 
-    const text = `Olá, vim do site e gostaria de mais informções. Finalizei meu diagnóstico na Landing Page: meu nome é ${name}, moro em ${countryClean} e sinto principalmente: ${symptomClean}. Gostaria de agendar minha sessão de Análise Corporal e Psicoterapia.`;
+    const text = `Olá, vim do site e gostaria de mais informções. Finalizei meu diagnóstico na Landing Page: meu nome é ${name}, moro em ${countryClean} e sinto principalmente: ${symptomClean}. Gostaria de agendar minha sessão de Análise Corporal e Terapia.`;
     return `https://api.whatsapp.com/send?phone=553388613561&text=${encodeURIComponent(text)}`; // Updated with Brazilian telephone and custom phrase prefix
   };
 

@@ -26,19 +26,19 @@ export const PAIN_POINTS: PainPoint[] = [
     id: "pain-1",
     number: "01",
     title: "Estar Sempre Forte",
-    description: "Você se obrigou a ser forte demais para aguentar a burocracia, o frio e a distância. Agora, seu pescoço, costas e estômago estão pagando o preço em forma de dores crônicas."
+    description: "Você se obrigou a ser forte demais para aguentar a burocracia, o frio e a distância. Agora, suas dores existeciais estão te dando a sensação de que você não deveria ter arriscado, ou ainda que esse país não te acolheu como deveria, você está sempre sendo traído (a), humilhado(a), muitas vezes parece que querem te expulsar daí."
   },
   {
     id: "pain-2",
     number: "02",
     title: "A Ansiedade de \"Dar Certo\"",
-    description: "O medo constante de não ser bom o suficiente no trabalho ou de falhar no novo país gera uma rigidez muscular e uma mente que nunca desliga."
+    description: "O medo constante de não ser bom o suficiente no trabalho e para os que ficaram no país de origem e o medo de falhar no novo país gera ansiedade e uma mente que nunca desliga."
   },
   {
     id: "pain-3",
     number: "03",
     title: "A Divisão Emocional",
-    description: "Seu corpo está na Europa, mas sua cabeça e a culpa estão no Brasil (pelos pais que envelhecem, pela família que ficou). Essa divisão se reflete em insônia e apatia."
+    description: "Seu corpo está na Europa, mas sua cabeça e a culpa estão no Brasil (pelos pais que envelhecem, pela família que ficou). Essa divisão te sabota todos dias."
   },
   {
     id: "pain-4",
@@ -69,8 +69,8 @@ export const FOR_WHOM_ITEMS: CheckItem[] = [
 
 export const FAQS: FAQItem[] = [
   {
-    question: "Como funciona a Análise Corporal e Fisiognomia online?",
-    answer: "A análise é realizada por videoconferência com excelente iluminação. A fisionomia (traços do rosto), a distribuição de massa muscular, a postura e o formato corporal são observados clinicamente. Cada formato corporal e traço facial reflete o desenvolvimento do sistema nervoso e as defesas emocionais moldadas na infância. Com isso, mapeamos o seu funcionamento inconsciente com alta precisão."
+    question: "Como funciona a Análise Corporal online?",
+    answer: "A análise é realizada por videoconferência com excelente iluminação. Serão analisadas 5 partes do seu corpo através de observação profissional e critério de pontuação. Onde seus traços serão identificados por porcentagem."
   },
   {
     question: "Moro na Europa. Como ficam os horários das sessões?",
@@ -82,7 +82,7 @@ export const FAQS: FAQItem[] = [
   },
   {
     question: "Em quanto tempo vejo resultados?",
-    answer: "Diferente da psicoterapia tradicional que pode durar anos para identificar padrões recorrentes, a Análise Corporal é focada e cirúrgica. No primeiro encontro de devolução, você já recebe o diagnóstico exato dos seus traços e as chaves práticas para destravar suas dores e problemas atuais."
+    answer: "Diferente da terapia tradicional que pode durar anos para identificar padrões recorrentes, a Análise Corporal é focada e cirúrgica. No primeiro encontro de devolução, você já recebe o diagnóstico exato dos seus traços e as chaves práticas para destravar suas dores e problemas atuais."
   },
   {
     question: "O atendimento é sigiloso?",
@@ -107,3 +107,103 @@ export const SYMPTOM_OPTIONS = [
   { id: "symp_guilt", label: "Culpa & Sentimento de divisão entre Brasil e Exterior" },
   { id: "symp_identity", label: "Perda de Identidade & Esgotamento emocional" }
 ];
+
+export interface BodyShape {
+  id: "esquizoide" | "oral" | "psicopata" | "masoquista" | "rigido";
+  name: string;
+  geometry: string;
+  subtitle: string;
+  shapeType: "rectangle" | "circle" | "triangle" | "square" | "hourglass";
+  pain: string;
+  symptoms: string[];
+  phrase: string;
+}
+
+export const BODY_SHAPES: BodyShape[] = [
+  {
+    id: "esquizoide",
+    name: "Esquizoide",
+    geometry: "Retângulo",
+    subtitle: "Corpo mais magro, distante, \"desconectado\"",
+    shapeType: "rectangle",
+    pain: "Rejeição profunda (existencial)",
+    symptoms: [
+      "Sensação de não pertencimento",
+      "Dificuldade de se conectar emocionalmente",
+      "Vive muito no mundo interno (mente)",
+      "Evita contato profundo com pessoas",
+      "Medo de invasão emocional",
+      "Pode parecer frio, mas é proteção"
+    ],
+    phrase: "👉 Se protege se afastando antes mesmo de tentar."
+  },
+  {
+    id: "oral",
+    name: "Oral",
+    geometry: "Círculo",
+    subtitle: "Formato mais arredondado / oval",
+    shapeType: "circle",
+    pain: "Abandono",
+    symptoms: [
+      "Sensação de vazio constante",
+      "Carência emocional, mesmo rodeada de pessoas",
+      "Faz muito pelos outros esperando receber de volta",
+      "Dificuldade em se sentir preenchida",
+      "Medo de ficar sozinha",
+      "Busca amor fora, mas não se sente saciada"
+    ],
+    phrase: "👉 É como um copo que nunca parece cheio."
+  },
+  {
+    id: "psicopata",
+    name: "Psicopata",
+    geometry: "Triângulo Invertido",
+    subtitle: "Corpo mais estruturado, postura firme",
+    shapeType: "triangle",
+    pain: "Rejeição / traição",
+    symptoms: [
+      "Necessidade de controle",
+      "Dificuldade em confiar nas pessoas",
+      "Medo de ser enganado ou passado para trás",
+      "Postura forte por fora, mas vulnerável por dentro",
+      "Pode manipular para não perder o controle",
+      "Evita demonstrar fraqueza"
+    ],
+    phrase: "👉 Prefere controlar o jogo a correr o risco de perder."
+  },
+  {
+    id: "masoquista",
+    name: "Masoquista",
+    geometry: "Quadrado",
+    subtitle: "Corpo mais \"compacto\", travado",
+    shapeType: "square",
+    pain: "Humilhação",
+    symptoms: [
+      "Engole sentimentos para não gerar conflito",
+      "Sensação de injustiça (\"eu faço tudo e ninguém reconhece\")",
+      "Dificuldade em dizer não",
+      "Se coloca em segundo plano",
+      "Carrega peso emocional e responsabilidade excessiva",
+      "Tendência a se sacrificar pelos outros"
+    ],
+    phrase: "👉 Vive com o freio de mão puxado na própria vida."
+  },
+  {
+    id: "rigido",
+    name: "Rígido",
+    geometry: "Ampulheta",
+    subtitle: "Corpo proporcional, mais \"certinho\"",
+    shapeType: "hourglass",
+    pain: "Rejeição afetiva (principalmente amorosa)",
+    symptoms: [
+      "Busca perfeição para ser amado",
+      "Dificuldade em lidar com erros e falhas",
+      "Controle emocional elevado",
+      "Competitivo, quer ser reconhecido",
+      "Medo de não ser suficiente",
+      "Pode travar sentimentos para não se expor"
+    ],
+    phrase: "👉 Acredita que precisa ser impecável para merecer amor."
+  }
+];
+
