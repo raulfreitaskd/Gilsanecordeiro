@@ -28,7 +28,7 @@ import FAQ from "./components/FAQ";
 const WHATSAPP_NUMBER = "553388613561";
 
 const getWhatsAppUrl = (originalText?: string) => {
-  const text = "Olá, vim do site e gostaria de mais informções";
+  const text = "Olá, vim do site e gostaria de mais informações";
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 };
 
